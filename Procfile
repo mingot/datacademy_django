@@ -1,1 +1,1 @@
-web: gunicorn datacademy.wsgi
+web: gunicorn datacademy.datacademy.wsgi

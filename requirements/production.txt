@@ -1,3 +1,10 @@
 # Pro-tip: Try not to put anything here. There should be no dependency in
 #	production that isn't in development.
 -r base.txt
+
+# heroku
+dj-database-url==0.2.1
+dj-static==0.0.5
+gunicorn==17.5
+psycopg2==2.5.1
+static==0.4
