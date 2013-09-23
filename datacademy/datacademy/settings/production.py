@@ -49,14 +49,16 @@ EMAIL_USE_TLS = True
 SERVER_EMAIL = EMAIL_HOST_USER
 ########## END EMAIL CONFIGURATION
 
-########## DATABASE CONFIGURATION
-DATABASES = {}
+########## DATABASE CONFIGURATION (HEROKU)
+# Parse database configuration from $DATABASE_URL
+import dj_database_url
+DATABASES['default'] =  dj_database_url.config()
 ########## END DATABASE CONFIGURATION
 
 
 ########## CACHE CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#caches
-CACHES = {}
+# CACHES = {}
 ########## END CACHE CONFIGURATION
 
 
@@ -66,9 +68,6 @@ CACHES = {}
 ########## END SECRET CONFIGURATION
 
 ########## HEROKU
-# Parse database configuration from $DATABASE_URL
-import dj_database_url
-DATABASES['default'] =  dj_database_url.config()
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
