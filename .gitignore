@@ -16,3 +16,8 @@ build
 
 # Logs:
 *.log
+
+# sublime
+*.sublime-project
+*.sublime-workspace
+
