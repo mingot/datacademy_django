@@ -24,7 +24,8 @@
         $(window).scrollTop($('body').height() - $(window).height() + 80);
       }
     
-      var socket = io.connect('http://localhost:9000');
+      // var socket = io.connect('http://localhost:9000');
+      var socket = io.connect('http://infinite-scrubland-1228.herokuapp.com:9000');
       
       socket.on('response', function(data) {
         // add_content($.map(data, function(e,i) {
