@@ -53,7 +53,7 @@
               <li class="active"><a href=#>About</a></li>
               <li><a href=#>Contact</a></li>
               <li><a href=#>Courses</a></li>
-              <li><a href=#>RonCloud</a></li>
+              <li><a href={% url 'rserver' %}>RonCloud</a></li>
             </ul>
             <ul class="nav pull-right">
               {% if request.user.is_authenticated %}

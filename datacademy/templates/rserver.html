@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block page_title %}Rserver{% endblock page_title %}
+
+{% block content %}  
+
+  <div class="row">
+    <div id="content"></div>
+      <form>
+        &gt; <input>
+      </form>
+    </div>
+  </div>
+
+{% endblock content %}
+
+{% block extra_js %}
+    <script src="{% static 'js/socket.io.js' %}"></script>
+    <script type="text/javascript" charset="utf-8">
+      
+      function add_content(str){
+        $('#content').append('<p>' + $('<div/>').text(str).html() + '</p>');
+        $(window).scrollTop($('body').height() - $(window).height() + 80);
+      }
+    
+      var socket = io.connect('http://localhost:9000');
+      
+      socket.on('response', function(data) {
+        // add_content($.map(data, function(e,i) {
+        //   return String.fromCharCode(e);
+        // }).join(''));
+        add_content(data);
+      });
+
+      $(function(){ $('form').submit(function(e){
+          var input = $('input');
+          var inputVal = input.val();
+          socket.emit('message',inputVal);
+          add_content('>' + inputVal);
+          input.val('');
+          return false;
+        });
+        $('input').focus();
+      });
+    
+    </script> 
+
+{% endblock extra_js %}
