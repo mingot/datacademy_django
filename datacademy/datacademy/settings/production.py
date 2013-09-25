@@ -22,6 +22,7 @@ def get_env_setting(setting):
 # See: https://docs.djangoproject.com/en/1.5/releases/1.5/#allowed-hosts-required-in-production
 # ALLOWED_HOSTS = []
 ########## END HOST CONFIGURATION
+DEBUG = True
 
 ########## EMAIL CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#email-backend
