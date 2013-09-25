@@ -29,11 +29,11 @@ urlpatterns = patterns(
 )
 
 
-# urlpatterns += patterns('',
-#     url(r'^static/(?P<path>.*)$',  'django.contrib.staticfiles.views', {
-#         'document_root': settings.STATIC_ROOT,
-#     }),
-#  )
+urlpatterns += patterns('',
+    url(r'^static/(?P<path>.*)$',  'django.contrib.staticfiles.views', {
+        'document_root': settings.STATIC_ROOT,
+    }),
+ )
 
 # Allow access to the Media folder from the browser
 if settings.DEBUG:
