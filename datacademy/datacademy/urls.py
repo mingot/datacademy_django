@@ -13,7 +13,6 @@ urlpatterns = patterns(
     url(r'^rserver$', TemplateView.as_view(template_name='rserver.html'),
         name='rserver'),
 
-
     # url(r'^about/$', TemplateView.as_view(template_name='about.html'),
     #     name="about"),
     # url(r'^contact/$', TemplateView.as_view(template_name='contact.html'),
@@ -27,13 +26,6 @@ urlpatterns = patterns(
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
 )
-
-
-urlpatterns += patterns('',
-    url(r'^static/(?P<path>.*)$',  'django.contrib.staticfiles.views', {
-        'document_root': settings.STATIC_ROOT,
-    }),
- )
 
 # Allow access to the Media folder from the browser
 if settings.DEBUG:
