@@ -23,6 +23,9 @@ urlpatterns = patterns(
     # userena app
     (r'^accounts/', include('userena.urls')),
 
+    # courses app
+    (r'^courses/', include('courses.urls')),
+
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
 )

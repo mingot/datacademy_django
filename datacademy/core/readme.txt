@@ -1,0 +1,1 @@
+core app contains code to be reused across the whole application

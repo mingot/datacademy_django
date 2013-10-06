@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block page_title %}Lectures list{% endblock page_title %}
+
+
+{% block content %}
+  
+  <div class="row-fluid">
+    {% for lecture in lecture_list %}
+      <a href="{% url 'lecture_detail' lecture.pk %}">{{ lecture.title }}</a>
+      <p>{{ lecture.description }}</p>
+      <p></p>  
+    {% endfor %}
+  </div>
+
+{% endblock content %}

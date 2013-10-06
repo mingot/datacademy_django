@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block page_title %}Lecture {{ lecture.title }}{% endblock page_title %}
+
+
+{% block content %}
+
+<iframe width="560" height="315" src="//www.youtube.com/embed/mVWeqAPQUXc" frameborder="0" allowfullscreen></iframe>
+
+<canvas id="the-canvas" style="border:1px solid black;"/>
+
+<p><a href="{% url 'exercise_list' lecture.pk %}">exercises</a></p>
+
+{% endblock content %}
+
+{% block extra_js %}
+  <script type="text/javascript" src="{% static 'js/pdfjs/pdf.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/pdfjs/compatibility.js' %}"></script>
+  <script type="text/javascript">
+    PDFJS.workerSrc = {% static 'js/pdfjs/pdf.worker.js' %};
+  </script>
+
+<script>
+
+'use strict';
+
+//
+// Fetch the PDF document from the URL using promises
+//
+PDFJS.getDocument('{{ lecture.slides.url }}').then(function(pdf) {
+  // Using promise to fetch the page
+  pdf.getPage(1).then(function(page) {
+    var scale = 1.5;
+    var viewport = page.getViewport(scale);
+
+    //
+    // Prepare canvas using PDF page dimensions
+    //
+    var canvas = document.getElementById('the-canvas');
+    var context = canvas.getContext('2d');
+    canvas.height = viewport.height;
+    canvas.width = viewport.width;
+
+    //
+    // Render PDF page into canvas context
+    //
+    var renderContext = {
+      canvasContext: context,
+      viewport: viewport
+    };
+    page.render(renderContext);
+  });
+});
+</script>
+
+{% endblock extra_js %}
+
