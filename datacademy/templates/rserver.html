@@ -24,8 +24,8 @@
         $(window).scrollTop($('body').height() - $(window).height() + 80);
       }
     
-      // var socket = io.connect('http://localhost:9000');
-      var socket = io.connect('http://datacademy-node.herokuapp.com/.herokuapp.com');
+      // var socket = io.connect('http://localhost:5000');
+      var socket = io.connect('http://datacademy-node.herokuapp.com/');
       
       socket.on('response', function(data) {
         add_content(data);
