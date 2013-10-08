@@ -25,12 +25,9 @@
       }
     
       // var socket = io.connect('http://localhost:9000');
-      var socket = io.connect('http://infinite-scrubland-1228.herokuapp.com');
+      var socket = io.connect('http://datacademy-node.herokuapp.com/.herokuapp.com');
       
       socket.on('response', function(data) {
-        // add_content($.map(data, function(e,i) {
-        //   return String.fromCharCode(e);
-        // }).join(''));
         add_content(data);
       });
 
