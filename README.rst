@@ -1,6 +1,7 @@
 ========================
 django-twoscoops-project
 ========================
+caca
 
 A project template for Django 1.5.
 
