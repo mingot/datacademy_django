@@ -7,6 +7,11 @@ class CourseList(ListView):
     context_object_name = 'course_list'
 
 
+class CourseDetail(DetailView):
+    model = Course
+    context_object_name = 'course'
+
+
 class LectureList(ListView):
     model = Lecture
     context_object_name = 'lecture_list'
@@ -18,12 +23,25 @@ class LectureDetail(DetailView):
 
     # def get_context_data(self, **kwargs):
     #     # Call the base implementation first to get a context
-    #     context = super(PublisherDetail, self).get_context_data(**kwargs)
+    #     context = super(LectureDetail, self).get_context_data(**kwargs)
     #     # Add in a QuerySet of all the books
-    #     context['exercise_list'] = self.object.exercise_set.all()
+    #     context['element_active'] = self.object
     #     return context
+
 
 class ExerciseList(ListView):
     model = Exercise
     context_object_name = 'exercise_list'
 
+
+class ExerciseDetail(DetailView):
+    model = Exercise
+    context_object_name = 'exercise'
+
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+        context = super(ExerciseDetail, self).get_context_data(**kwargs)
+        # Add in a QuerySet of all the books
+        context['lecture'] = self.object.lecture
+        context['element_active'] = self.object
+        return context

@@ -1,60 +1,27 @@
 {% extends "base.html" %}
-{% load staticfiles %}
+
 
 {% block page_title %}Lecture {{ lecture.title }}{% endblock page_title %}
 
 
-{% block content %}
+{% block container %}
 
-<iframe width="560" height="315" src="//www.youtube.com/embed/mVWeqAPQUXc" frameborder="0" allowfullscreen></iframe>
+<div class="container-fluid">
+  <div class="row-fluid">
 
-<canvas id="the-canvas" style="border:1px solid black;"/>
+    {% include "core/sidebar.html" %}
 
-<p><a href="{% url 'exercise_list' lecture.pk %}">exercises</a></p>
+    <div class="span10"> 
+      <p class="text-center">
+        <iframe width="560" height="315" src="//www.youtube.com/embed/mVWeqAPQUXc" frameborder="0" allowfullscreen></iframe>
+      </p>
+      <p class="text-center">
+        <a href="{% url 'exercise_detail' lecture.exercise_set.all.0.pk %}" class="btn btn-large btn-primary">Start challenges</a>
+      </p>
+    </div>
+  </div>
+</div>
 
-{% endblock content %}
+{% endblock container %}
 
-{% block extra_js %}
-  <script type="text/javascript" src="{% static 'js/pdfjs/pdf.js' %}"></script>
-  <script type="text/javascript" src="{% static 'js/pdfjs/compatibility.js' %}"></script>
-  <script type="text/javascript">
-    PDFJS.workerSrc = {% static 'js/pdfjs/pdf.worker.js' %};
-  </script>
-
-{% if lecture.slides %}
-  <script>
-
-  'use strict';
-
-  //
-  // Fetch the PDF document from the URL using promises
-  //
-  PDFJS.getDocument('{{ lecture.slides.url }}').then(function(pdf) {
-    // Using promise to fetch the page
-    pdf.getPage(1).then(function(page) {
-      var scale = 1.5;
-      var viewport = page.getViewport(scale);
-
-      //
-      // Prepare canvas using PDF page dimensions
-      //
-      var canvas = document.getElementById('the-canvas');
-      var context = canvas.getContext('2d');
-      canvas.height = viewport.height;
-      canvas.width = viewport.width;
-
-      //
-      // Render PDF page into canvas context
-      //
-      var renderContext = {
-        canvasContext: context,
-        viewport: viewport
-      };
-      page.render(renderContext);
-    });
-  });
-  </script>
-{% endif %}
-
-{% endblock extra_js %}
 

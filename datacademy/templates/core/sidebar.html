@@ -1,0 +1,16 @@
+<div class="span2">
+  <div class="well sidebar-nav">
+    <ul class="nav nav-list">
+      <li class="nav-header">Level 1</li>
+      <li class="nav-header">Exercises</li>
+      {% for exercise in lecture.exercise_set.all %}
+        {% if exercise == element_active %}
+          <li class="active"><a href="{% url 'exercise_detail' exercise.pk %}">{{ exercise.title }}</a></li>
+        {% else %}
+          <li><a href="{% url 'exercise_detail' exercise.pk %}">{{ exercise.title }}</a></li>
+        {% endif %}
+        
+      {% endfor %}
+    </ul>
+  </div><!--/.well -->
+</div><!--/span-->

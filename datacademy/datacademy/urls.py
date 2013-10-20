@@ -8,7 +8,7 @@ admin.autodiscover()
 
 urlpatterns = patterns(
     '',
-    url(r'^$', TemplateView.as_view(template_name='base.html'),
+    url(r'^$', TemplateView.as_view(template_name='index.html'),
         name='home'),
     url(r'^rserver$', TemplateView.as_view(template_name='rserver.html'),
         name='rserver'),
