@@ -18,6 +18,7 @@ class Course(CommonInfo):
 
 
 class Lecture(CommonInfo):
+    # number = models.PositiveSmallIntegerField()
     course = models.ForeignKey('Course')
     slides = models.FileField(upload_to='lectures/',
                               blank=True,
@@ -26,8 +27,14 @@ class Lecture(CommonInfo):
                              blank=True,
                              null=True)
 
+    # def next_lecture(self):
+    #     next = Lecture.objects.filter(course=self.course).\
+    #         filter(number__gt=self.number).order_by('number')[0:1]
+    #     return next
+
 
 class Exercise(CommonInfo):
+    # number = models.PositiveSmallIntegerField()
     lecture = models.ForeignKey('Lecture')
     initial_code = models.TextField()
     hint = models.TextField()

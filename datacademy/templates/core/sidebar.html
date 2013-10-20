@@ -1,7 +1,7 @@
 <div class="span2">
   <div class="well sidebar-nav">
     <ul class="nav nav-list">
-      <li class="nav-header">Level 1</li>
+      <li class="nav-header"><a href="{% url 'lecture_detail' lecture.pk %}">Level 1</a></li>
       <li class="nav-header">Exercises</li>
       {% for exercise in lecture.exercise_set.all %}
         {% if exercise == element_active %}
@@ -9,8 +9,9 @@
         {% else %}
           <li><a href="{% url 'exercise_detail' exercise.pk %}">{{ exercise.title }}</a></li>
         {% endif %}
-        
       {% endfor %}
+      <li class="divider"></li>
+      <li><a href="{% url 'course_detail' lecture.course.pk %}">Lecture list</a></li>
     </ul>
   </div><!--/.well -->
 </div><!--/span-->

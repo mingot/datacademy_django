@@ -6,39 +6,73 @@
   <link href="{% static 'css/jquery_terminal/jquery.terminal.css' %}" rel="stylesheet"/>
 {% endblock extra_css %}
 
-{% block container %}
+{% block content %}
 
-<div class="container-fluid">
   <div class="row-fluid">
 
     {% include "core/sidebar.html" %}
 
+    <div class="span10">
+      <h1>{{ exercise.title }}</h1>
+      <p class="lead">{{ exercise.description }}</p>
+    </div>
+
+    <!-- Terminal -->
     <div class="span5">
       <div id="term_demo" class="terminal">
       </div>
     </div>
-    <div class="span5">
-      <iframe id="resource_iframe" src="{{ lecture.slides.url }}" style="width: 100%; height: 400px">
-        <html>
-        <body marginwidth="0" marginheight="0" style="background-color: rgb(38,38,38)">
-          <embed width="100%" height="100%" name="plugin" src="{{ lecture.slides.url }}" type="application/pdf">
-        </body>
-        </html>
-      </iframe>
-    </div>
-  </div>
-</div>
-{% endblock container %}
 
-    {#<button class="btn btn-small" type="button" onclick="goPrevious()">Previous</button>
-    <button class="btn btn-small pull-right" type="button" onclick="goNext()">Next</button>
-    <canvas id="the-canvas" style="border:1px solid black;"/>#}
+    <!-- Helper -->
+    <div class="span5">
+
+      <!-- Tab nav -->
+      <ul id="myTab" class="nav nav-tabs">
+        <li class=""><a href="#help" data-toggle="tab">Help</a></li>
+        <li class="active"><a href="#plot" data-toggle="tab">Plot</a></li>
+        <li class=""><a href="#hint" data-toggle="tab">Hint</a></li>
+        <li class=""><a href="#slides" data-toggle="tab">Slides</a></li>
+      </ul>
+
+      <!-- Tab content -->
+      <div class="tab-content">
+        <div class="tab-pane active" id="help">
+          <div id="testLoad"></div>
+        </div>
+        <div class="tab-pane" id="plot">
+          <p>TBD.<p>
+        </div>
+        <div class="tab-pane" id="hint">
+          <p>TBD.<p>
+        </div>
+        <div class="tab-pane" id="slides">
+          <iframe id="resource_iframe" src="{{ lecture.slides.url }}" style="width: 100%; height: 400px"></iframe>
+        </div>
+      </div>
+    </div>
+  
+  </div><!--/row-fluid-->
+{% endblock content %}
+
 
 {% block extra_js %}
   <script type="text/javascript" src="{% static 'js/pdfjs/pdf.js' %}"></script>
   <script type="text/javascript" src="{% static 'js/pdfjs/compatibility.js' %}"></script>
   <script type="text/javascript" src="{% static 'js/jquery_terminal/jquery.mousewheel-min.js' %}"></script>
   <script type="text/javascript" src="{% static 'js/jquery_terminal/jquery.terminal-min.js' %}"></script>
+  <script>
+    $('.container').addClass('container-fluid').removeClass('container');
+  </script>
+  
+  <script>
+    $("#testLoad").load("http://www.nku.edu/~longa/Rweb/library/base/html/apply.html");
+  </script>
+
+  <script>
+    $(function () {
+      $('#myTab a:last').tab('show');
+    })
+  </script>
 
   <script type="text/javascript">
   jQuery(function($, undefined) {

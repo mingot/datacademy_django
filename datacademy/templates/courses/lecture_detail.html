@@ -1,27 +1,34 @@
 {% extends "base.html" %}
 
+{% block content %}
 
-{% block page_title %}Lecture {{ lecture.title }}{% endblock page_title %}
-
-
-{% block container %}
-
-<div class="container-fluid">
   <div class="row-fluid">
 
     {% include "core/sidebar.html" %}
 
     <div class="span10"> 
+
+      <div class="page-header">
+        <h1><small>Lecture 1 </small>{{ lecture.title }}</h1>
+      </div>
+
       <p class="text-center">
         <iframe width="560" height="315" src="//www.youtube.com/embed/mVWeqAPQUXc" frameborder="0" allowfullscreen></iframe>
       </p>
       <p class="text-center">
         <a href="{% url 'exercise_detail' lecture.exercise_set.all.0.pk %}" class="btn btn-large btn-primary">Start challenges</a>
       </p>
+
+
     </div>
   </div>
-</div>
+{% endblock content %}
 
-{% endblock container %}
+
+{% block extra_js %}
+<script>
+$('.container').addClass('container-fluid').removeClass('container');
+</script>
+{% endblock extra_js %}
 
 
