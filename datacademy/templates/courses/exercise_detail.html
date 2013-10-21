@@ -4,6 +4,15 @@
 
 {% block extra_css %}
   <link href="{% static 'css/jquery_terminal/jquery.terminal.css' %}" rel="stylesheet"/>
+  <style>
+    .container-fluid, 
+    .row-fluid,
+    .span5 {
+      height:100%;
+    }
+
+
+  </style>
 {% endblock extra_css %}
 
 {% block content %}
@@ -12,7 +21,7 @@
 
     {% include "core/sidebar.html" %}
 
-    <div class="span10">
+    <div class="span10 page-header">
       <h1>{{ exercise.title }}</h1>
       <p class="lead">{{ exercise.description }}</p>
     </div>
@@ -37,7 +46,7 @@
       <!-- Tab content -->
       <div class="tab-content">
         <div class="tab-pane active" id="help">
-          <iframe id="frame" src="" style="width: 100%; height: 400px" ></iframe>
+          <iframe id="frame" src="" style="width: 100%; height:450px;" ></iframe>
         </div>
         <div class="tab-pane" id="plot">
           <p>TBD.<p>
@@ -46,13 +55,16 @@
           <p>TBD.<p>
         </div>
         <div class="tab-pane" id="slides">
-          <iframe id="resource_iframe" src="{{ lecture.slides.url }}" style="width: 100%; height: 400px"></iframe>
+          <iframe id="resource_iframe" src="{{ lecture.slides.url }}" style="width: 100%; height:450px;"></iframe>
         </div>
       </div>
     </div>
 
   </div><!--/row-fluid-->
 {% endblock content %}
+
+
+{% block push %}{% endblock push %}
 
 
 {% block extra_js %}
@@ -80,8 +92,8 @@
 
   <script type="text/javascript">
   //regular expression definitions
-  var reHelp = /help\((\w+)\)/,
-      rePlot = /plot\((\w+)\)/;
+  var reHelp = /help\(([A-Za-z0-9_\.]+)\)/,
+      rePlot = /plot\(([A-Za-z0-9_\.|\:]+)\)/;
 
   jQuery(function($, undefined) {
     $('#term_demo').terminal(function(command, term) {
@@ -114,7 +126,7 @@
     }, {
         greetings: 'Press Enter to submit, or type \'help\' for info',
         name: 'js_demo',
-        height: 400,
+        height: 500,
         prompt: '> '});
   });
   </script>

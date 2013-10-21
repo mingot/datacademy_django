@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load staticfiles %}
 
 {% block content %}
 
@@ -9,16 +10,16 @@
     <div class="span10"> 
 
       <div class="page-header">
-        <h1><small>Lecture 1 </small>{{ lecture.title }}</h1>
+        <h1><small>Lecture {{ lecture.number }} </small>{{ lecture.title }}</h1>
       </div>
 
-      <p class="text-center">
-        <iframe width="560" height="315" src="//www.youtube.com/embed/mVWeqAPQUXc" frameborder="0" allowfullscreen></iframe>
-      </p>
-      <p class="text-center">
-        <a href="{% url 'exercise_detail' lecture.exercise_set.all.0.pk %}" class="btn btn-large btn-primary">Start challenges</a>
-      </p>
-
+      <div class="span8 offset1">
+        {{ lecture.video|safe }}
+        <hr>
+        <p class="text-center">
+          <a href="{% url 'exercise_detail' lecture.exercise_set.all.0.pk %}" class="btn btn-large btn-primary">Start challenges</a>
+        </p>
+      </div>
 
     </div>
   </div>
@@ -29,6 +30,16 @@
 <script>
 $('.container').addClass('container-fluid').removeClass('container');
 </script>
+
+
+<script src="{% static 'js/fitvid/jquery.fitvids.js' %}"></script>
+<script>
+  $(document).ready(function(){
+    // Target your .container, .wrapper, .post, etc.
+    $(".row-fluid").fitVids();
+  });
+</script>
 {% endblock extra_js %}
+
 
 

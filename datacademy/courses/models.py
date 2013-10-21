@@ -18,14 +18,15 @@ class Course(CommonInfo):
 
 
 class Lecture(CommonInfo):
-    # number = models.PositiveSmallIntegerField()
+    number = models.PositiveSmallIntegerField()
     course = models.ForeignKey('Course')
     slides = models.FileField(upload_to='lectures/',
                               blank=True,
                               null=True)
-    video = models.FileField(upload_to='lectures/',
-                             blank=True,
+    video = models.TextField(blank=True,
                              null=True)
+    class Meta:
+        ordering = ['number']
 
     # def next_lecture(self):
     #     next = Lecture.objects.filter(course=self.course).\
@@ -33,11 +34,16 @@ class Lecture(CommonInfo):
     #     return next
 
 
+
+
 class Exercise(CommonInfo):
-    # number = models.PositiveSmallIntegerField()
+    number = models.PositiveSmallIntegerField()
     lecture = models.ForeignKey('Lecture')
     initial_code = models.TextField()
     hint = models.TextField()
     unit_test = models.TextField()
+
+    class Meta:
+        ordering = ['number']
 
 
