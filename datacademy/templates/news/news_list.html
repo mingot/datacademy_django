@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block page_title %}Analytic News {% endblock page_title %}
+
+{% block content %}
+<div class="span8">
+  {% for element in news %}
+    <h3><a href="{{ element.link }}">{{ element.title }}</a></h3>
+    {{ element.raw|safe }}
+    <hr>
+  {% endfor %}
+</div>
+{% endblock content %}
+
+
+
+{% block extra_js %}
+<script>
+ $(".annInner").addClass("well");
+</script>
+{% endblock extra_js %}

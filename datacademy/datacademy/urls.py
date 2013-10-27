@@ -26,6 +26,9 @@ urlpatterns = patterns(
     # courses app
     (r'^courses/', include('courses.urls')),
 
+    # news app
+    (r'^news/', include('news.urls')),
+
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
 )

@@ -210,6 +210,7 @@ LOCAL_APPS = (
     'core',
     'accounts',
     'courses',
+    'news',
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
