@@ -5,12 +5,17 @@
 {% block extra_css %}
   <link href="{% static 'css/jquery_terminal/jquery.terminal.css' %}" rel="stylesheet"/>
   <style>
-    .container-fluid, 
-    .row-fluid,
-    .span5 {
-      height:100%;
-    }
 
+/*    .fill{
+      height:100%;
+      min-height:100%;
+      padding: 0 20px 0 20px;
+    }*/
+
+    iframe{
+      width:100%; 
+      height:400px;
+    }
 
   </style>
 {% endblock extra_css %}
@@ -21,45 +26,47 @@
 
     {% include "core/sidebar.html" %}
 
-    <div class="span10 page-header">
-      <h1>{{ exercise.title }}</h1>
-      <p class="lead">{{ exercise.description }}</p>
-    </div>
-
-    <!-- Terminal -->
-    <div class="span5">
-      <div id="term_demo" class="terminal">
+    <div class="span10">
+      <div class="span10 page-header">
+        <h1>{{ exercise.title }}</h1>
+        <p class="lead">{{ exercise.description }}</p>
       </div>
-    </div>
 
-    <!-- Helper -->
-    <div class="span5">
-
-      <!-- Tab nav -->
-      <ul id="ulTab" class="nav nav-tabs">
-        <li class=""><a id="help-tab" href="#help" data-toggle="tab">Help</a></li>
-        <li class=""><a id="plot-tab" href="#plot" data-toggle="tab">Plot</a></li>
-        <li class=""><a id="hint-tab" href="#hint" data-toggle="tab">Hint</a></li>
-        <li class=""><a id="slides-tab" href="#slides" data-toggle="tab">Slides</a></li>
-      </ul>
-
-      <!-- Tab content -->
-      <div class="tab-content">
-        <div class="tab-pane active" id="help">
-          <iframe id="frame" src="" style="width: 100%; height:450px;" ></iframe>
-        </div>
-        <div class="tab-pane" id="plot">
-          <p>TBD.<p>
-        </div>
-        <div class="tab-pane" id="hint">
-          <p>TBD.<p>
-        </div>
-        <div class="tab-pane" id="slides">
-          <iframe id="resource_iframe" src="{{ lecture.slides.url }}" style="width: 100%; height:450px;"></iframe>
+      <!-- Terminal -->
+      <div class="span5">
+        <div id="term_demo" class="terminal">
         </div>
       </div>
-    </div>
 
+      <!-- Helper -->
+      <div class="span5">
+
+        <!-- Tab nav -->
+        <ul id="ulTab" class="nav nav-tabs">
+          <li class=""><a id="help-tab" href="#help" data-toggle="tab">Help</a></li>
+          <li class=""><a id="plot-tab" href="#plot" data-toggle="tab">Plot</a></li>
+          <li class=""><a id="hint-tab" href="#hint" data-toggle="tab">Hint</a></li>
+          <li class=""><a id="slides-tab" href="#slides" data-toggle="tab">Slides</a></li>
+        </ul>
+
+        <!-- Tab content -->
+        <div class="tab-content">
+          <div class="tab-pane active" id="help">
+            <iframe id="frame" src=""></iframe>
+          </div>
+          <div class="tab-pane" id="plot">
+            <p>TBD.<p>
+          </div>
+          <div class="tab-pane" id="hint">
+            <p>TBD.<p>
+          </div>
+          <div class="tab-pane" id="slides">
+            <iframe id="resource_iframe" src="{{ lecture.slides.url }}"></iframe>
+            <!--<embed src='{{ lecture.slides.url }}' style="width: 100%; height:450px;">-->
+          </div>
+        </div>
+      </div><!--/span5 helper-->
+    </div><!--/span10-->
   </div><!--/row-fluid-->
 {% endblock content %}
 
@@ -73,7 +80,9 @@
   <script type="text/javascript" src="{% static 'js/jquery_terminal/jquery.mousewheel-min.js' %}"></script>
   <script type="text/javascript" src="{% static 'js/jquery_terminal/jquery.terminal-min.js' %}"></script>
   <script>
+    // change class container to container-fluid 
     $('.container').addClass('container-fluid').removeClass('container');
+    // $('.container-fluid').addClass('fill');
   </script>
   
   <script>
@@ -83,6 +92,7 @@
       $("#frame").attr("src", url);
     }
   </script>
+
 
   <script>
     $(function () {
@@ -126,7 +136,7 @@
     }, {
         greetings: 'Press Enter to submit, or type \'help\' for info',
         name: 'js_demo',
-        height: 500,
+        height: 450,
         prompt: '> '});
   });
   </script>

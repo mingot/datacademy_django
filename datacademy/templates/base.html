@@ -51,13 +51,11 @@
       -------------------------------------------------- */
       /* Not required for template or sticky footer method. */
 
-      #wrap > .container {
+      #wrap > .container,
+      #wrap > .container-fluid{
         padding-top: 60px;
       }
 
-      #wrap > .container-fluid {
-        padding-top: 60px;
-      }
       .container .credit .container-fluid {
         margin: 20px 0;
       }
@@ -102,7 +100,7 @@
       <div id="push"></div>
       {% endblock push %}
 
-    </div>
+    </div> <!-- /wrap -->
 
     <!-- FOOTER -->
     {% include "core/footer.html" %}

@@ -47,7 +47,11 @@
   <div class="jumbotron">
     <h1>{{ course.title }}</h1>
     <p class="lead">{{ course.description }}</p>
-    <a class="btn btn-large btn-success" href="{% url 'lecture_detail' course.lecture_set.all.0.pk %}">Start the course!</a>
+    {% if is_enrolled %}
+      <a class="btn btn-large btn-success" href="{% url 'lecture_detail' course.lecture_set.all.0.pk %}">Continue with the course</a>
+    {% else %}
+      <a class="btn btn-large btn-success" href="{% url 'lecture_detail' course.lecture_set.all.0.pk %}">Start the course!</a>
+    {% endif %}
   </div>
 
   <hr>

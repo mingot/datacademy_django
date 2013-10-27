@@ -6,10 +6,24 @@ class CourseList(ListView):
     model = Course
     context_object_name = 'course_list'
 
+    def get_queryset(self):
+        # Show only the courses the current user is enrolled in
+        profile = self.request.user.get_profile()
+        return profile.courses.all()
+
 
 class CourseDetail(DetailView):
     model = Course
     context_object_name = 'course'
+
+    def get_context_data(self, **kwargs):
+        # Save the course in the user courses
+        context = super(CourseDetail, self).get_context_data(**kwargs)
+        profile = self.request.user.get_profile()
+        context['is_enrolled'] = False
+        if profile.courses.filter(id=self.object.pk).exists():
+            context['is_enrolled'] = True
+        return context
 
 
 class LectureList(ListView):
@@ -20,6 +34,14 @@ class LectureList(ListView):
 class LectureDetail(DetailView):
     model = Lecture
     context_object_name = 'lecture'
+
+    def get_context_data(self, **kwargs):
+        # Save the course in the user courses
+        context = super(LectureDetail, self).get_context_data(**kwargs)
+        profile = self.request.user.get_profile()
+        profile.courses.add(self.object.course)
+        profile.save()
+        return context
 
     # def get_context_data(self, **kwargs):
     #     # Call the base implementation first to get a context

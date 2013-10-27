@@ -7,7 +7,7 @@
   
   <div class="row-fluid">
     {% for course in course_list %}
-      <a href="{% url 'lecture_list' course.pk %}">{{ course.title }}</a>
+      <a href="{% url 'course_detail' course.pk %}">{{ course.title }}</a>
       <p>{{ course.description }}</p>
       <p></p>    
     {% endfor %}

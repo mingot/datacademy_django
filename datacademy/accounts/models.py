@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext as _
 from userena.models import UserenaBaseProfile
-
+from courses.models import Course, Lecture, Exercise
 
 class DatacademyProfile(UserenaBaseProfile):
     user = models.OneToOneField(User,
@@ -12,3 +12,6 @@ class DatacademyProfile(UserenaBaseProfile):
     
     favourite_snack = models.CharField(_('favourite snack'),
                                        max_length=5)
+    courses = models.ManyToManyField(Course, blank=True, null=True)
+    lectures = models.ManyToManyField(Lecture, blank=True, null=True)
+    exercises = models.ManyToManyField(Exercise, blank=True, null=True)

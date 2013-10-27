@@ -20,6 +20,7 @@
               <b class="caret"></b>
             </a>
             <ul class="dropdown-menu">
+              <li><a href="{% url 'course_list' %}"><i class="icon-th-list"></i> Courses</a></li>
               <li><a href="{% url 'userena_profile_edit' request.user.username %}"><i class="icon-user"></i> Settings</a></li>
               <li class="divider"></li>
               <li><a href="{% url 'userena_signout' %}"><i class="icon-off"></i> Log out</a></li>
