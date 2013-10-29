@@ -26,7 +26,6 @@ def news_list(request):
 
 
 def construct_rss_dictionary():
-
     response = urllib2.urlopen('https://groups.diigo.com/group/datacademy/rss')
     raw_data = response.read()
     feed = feedparser.parse(raw_data)

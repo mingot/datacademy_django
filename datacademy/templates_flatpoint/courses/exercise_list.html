@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block page_title %}Exercises list{% endblock page_title %}
+
+
+{% block content %}
+  
+  <div class="row-fluid">
+    {% for exercise in exercise_list %}
+      <p>{{ exercise.title }}</p>
+      <p>{{ exercise.description }}</p> 
+      <pre><p>{{ exercise.initial_code }}</p></pre>   
+    {% endfor %}
+  </div>
+
+{% endblock content %}

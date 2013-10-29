@@ -95,7 +95,7 @@ STATIC_URL = '/static/'
 
 # See: https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#std:setting-STATICFILES_DIRS
 STATICFILES_DIRS = (
-    normpath(join(SITE_ROOT, 'static')),
+    normpath(join(SITE_ROOT, 'static_flatpoint')),
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#staticfiles-finders
@@ -149,7 +149,7 @@ TEMPLATE_LOADERS = (
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#template-dirs
 TEMPLATE_DIRS = (
-    normpath(join(SITE_ROOT, 'templates')),
+    normpath(join(SITE_ROOT, 'templates_flatpoint')),
 )
 ########## END TEMPLATE CONFIGURATION
 
@@ -202,7 +202,7 @@ THIRD_PARTY_APPS = (
     'easy_thumbnails',
 
     # Bootstrap integration with Django.
-    'bootstrap_toolkit',
+    'bootstrap3',
 )
 
 # Apps specific for this project go here.

@@ -1,0 +1,21 @@
+{% extends 'userena/profile_base.html' %}
+
+
+{% block profile_content %}
+    {% for course in course_list %}
+      <a href="{% url 'course_detail' course.pk %}">{{ course.title }}</a>
+      <p>{{ course.description }}</p>
+      <p></p>    
+    {% endfor %}
+  
+{% endblock profile_content %}
+
+{% block extra_js %}
+<script>
+  $("#courses").addClass("active");
+</script>
+{% endblock extra_js %}
+
+
+
+

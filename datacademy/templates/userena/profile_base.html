@@ -4,32 +4,32 @@
 
 {% block content %}
 
-<!-- nav bar -->
-<div class="span3">
-  <div class="well sidebar-nav">
-    <ul class="nav nav-list">
-      <li class="nav-header">Profile</li>
+<div class="row row-offcanvas row-offcanvas-left">
 
-        <li id="view_profile"><a href="{% url 'userena_profile_detail' user.username %}">{% trans "View profile" %}</a></li>
-        <li id="edit_details"><a href="{% url 'userena_profile_edit' user.username %}">{% trans "Edit details" %}</a></li>
-        <li id="courses"><a href="{% url 'course_list' %}">{% trans "Courses" %}</a></li>
-        <li id="change_password"><a href="{% url 'userena_password_change' user.username %}">{% trans "Change password" %}</a></li>
-        <li id="change_email"><a href="{% url 'userena_email_change' user.username %}">{% trans "Change email" %}</a></li>
+  <!-- nav bar -->
+  <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+    <div class="well sidebar-nav">
+      <ul class="nav">
+        <li>Profile</li>
 
-    </ul>
-  </div><!--/.well -->
-</div><!--/span-->
+          <li id="view_profile"><a href="{% url 'userena_profile_detail' user.username %}">{% trans "View profile" %}</a></li>
+          <li id="edit_details"><a href="{% url 'userena_profile_edit' user.username %}">{% trans "Edit details" %}</a></li>
+          <li id="courses"><a href="{% url 'course_list' %}">{% trans "Courses" %}</a></li>
+          <li id="change_password"><a href="{% url 'userena_password_change' user.username %}">{% trans "Change password" %}</a></li>
+          <li id="change_email"><a href="{% url 'userena_email_change' user.username %}">{% trans "Change email" %}</a></li>
 
-
-<div class="span8">
-{% block profile_content %}
-{% endblock profile_content %}
-</div>
+      </ul>
+    </div><!--/.well -->
+  </div><!--/col-xs-6 -->
 
 
-<ul id="box-nav">
+  <div class="col-xs-12 col-sm-9">
+  {% block profile_content %}
+  {% endblock profile_content %}
+  </div>
 
-  </ul>
+</div><!--/row -->
 
 
 {% endblock content %}
+

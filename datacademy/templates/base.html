@@ -1,65 +1,26 @@
 {% load staticfiles %}
-{% load bootstrap_toolkit %}
+{% load bootstrap3 %}
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
     <title>{% block title %}Datacademy{% endblock title %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="description" content="Learn to Predict">
+    <meta name="author" content="datacademy.io">
 
     <!-- Le styles -->
-    {% bootstrap_stylesheet_tag %}
-    {% bootstrap_stylesheet_tag "responsive" %}
+    {# {% bootstrap_css %} #}
+    <!-- Minified versions from NetDNA with CDN Support -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="{% static 'css/sticky-footer.css' %}">
+
     <style>
-    /* Sticky footer styles
-      -------------------------------------------------- */
-
-      html,
-      body {
-        height: 100%;
-        /* The html and body elements cannot have any padding or margin. */
-      }
-
-      /* Wrapper for page content to push down footer */
-      #wrap {
-        min-height: 100%;
-        height: auto !important;
-        height: 100%;
-        /* Negative indent footer by it's height */
-        margin: 0 auto -60px;
-      }
-
-      /* Set the fixed height of the footer here */
-      #push,
-      #footer {
-        height: 60px;
-      }
-
-      /* Lastly, apply responsive CSS fixes as necessary */
-      @media (max-width: 767px) {
-        #footer {
-          margin-left: -20px;
-          margin-right: -20px;
-          padding-left: 20px;
-          padding-right: 20px;
-        }
-      }
-
-      /* Custom page CSS
-      -------------------------------------------------- */
-      /* Not required for template or sticky footer method. */
-
-      #wrap > .container,
-      #wrap > .container-fluid{
-        padding-top: 60px;
-      }
-
-      .container .credit .container-fluid {
-        margin: 20px 0;
-      }
-
+    body {
+      padding-top: 70px;
+    }
     </style>
     
 
@@ -86,32 +47,38 @@
       <!-- NAVBAR -->
       {% include "core/navbar.html" %}
 
-      {% block carousel %}{% endblock carousel %}
+      <!-- CAROUSEL -->
+      {% block carousel %}
+      {% endblock carousel %}
 
-      <div class="container">
-        
+      <!-- CONTAINER -->
+      {% block container_div %}
+        <div class="container">
+      {% endblock container_div%}
+
+        <!-- PAGE TITLE -->
         <div class="page-header">
-        <h1>{% block page_title %}{% endblock page_title %}</h1>
+        <h1>{% block page_title%}{% endblock page_title%}</h1>
         </div>
 
-        {% block content %}{% endblock content %}      
+        <!-- CONTENT -->
+        {% block content %}
+        {% endblock content %}      
 
       </div> <!-- /container -->
-
-      {% block push %}
-      <div id="push"></div>
-      {% endblock push %}
-
+    
     </div> <!-- /wrap -->
 
     <!-- FOOTER -->
     {% include "core/footer.html" %}
 
+
     <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
-    {% bootstrap_javascript_tag %}
+    {# {% bootstrap_javascript %} #}
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 
     <!-- place project specific Javascript in this file -->
     <script src="{% static 'js/project.js' %}"></script>

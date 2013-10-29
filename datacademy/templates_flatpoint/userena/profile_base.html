@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load url from future %}
+
+{% block outer_content %}
+
+{% include "core/page_title.html" with page_title='Dashboard' %}
+
+<section id="blog-wrapper" class="section layout-2">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9 content-wrapper">
+            
+            {% block profile_content %}
+            {% endblock profile_content %}    
+
+            </div>
+            <!-- /.content-wrapper -->
+
+            <div class="col-md-3 sidebar">                       
+                <div class="widget categories">
+                    <h5 class="subpage-title">{{ user.username }}</h5>
+                    <ul class="widget-list">
+                        <li id="view_profile"><a href="{% url 'userena_profile_detail' user.username %}">{% trans "View profile" %}</a></li>
+                        <li id="edit_details"><a href="{% url 'userena_profile_edit' user.username %}">{% trans "Edit details" %}</a></li>
+                        <li id="courses"><a href="{% url 'course_list' %}">{% trans "Courses" %}</a></li>
+                        <li id="change_password"><a href="{% url 'userena_password_change' user.username %}">{% trans "Change password" %}</a></li>
+                        <li id="change_email"><a href="{% url 'userena_email_change' user.username %}">{% trans "Change email" %}</a></li>
+                    </ul>
+                </div>
+                <!-- /.categories -->
+            </div>
+            <!-- /.sidebar -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container -->
+</section>
+<!-- /#blog-wrapper -->
+
+{% endblock outer_content%}

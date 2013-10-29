@@ -1,0 +1,40 @@
+<header id="header-2" class="header">
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="{% url 'home' %}">Dat<span>academy</span></a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="{% url 'news_list' %}">News</a></li>
+                    {% if request.user.is_authenticated %}
+                        <li class="dropdown active">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ request.user }}</a>
+                            <ul class="dropdown-menu">
+                                <li><a href="{% url 'course_list' %}">Courses</a></li>
+                                <li><a href="{% url 'userena_profile_edit' request.user.username %}">Settings</a></li>
+                                <li><a href="{% url 'userena_signout' %}">Log out</a></li>
+                            </ul>
+                        </li>
+                    {% else %}
+                        <li><a href="{% url 'userena_signin' %}">Log in</a></li>
+                        <li><a href="{% url 'userena_signup' %}">Sign up</a></li>
+                    {% endif %}
+                </ul>
+                <!-- /.nav -->
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+    <!-- /.navbar -->
+</header>
+<!-- /#header-2 -->

@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+
+
+{% block outer_content %}
+
+{% include 'core/page_title.html' with page_title='Analytic News' %}
+
+
+<section id="blog-wrapper" class="section layout-1">
+<div class="container">
+    <div class="row">
+        <div class="col-md-9 content-wrapper">
+            {% for element in news %}
+            <article class="post">
+                <div class="post-content">
+                    <h4 class="post-title"><a href="{{ element.link }}">{{ element.title }}</a></h4>
+                    {{ element.raw|safe }}
+                </div> <!-- /.post-content -->
+                
+                <!--
+                <div class="post-meta">
+                    <ul class="meta-list">
+                        <li>
+                            <span>Posted on</span>
+                            <span class="black" >25 July 2013</span>
+                        </li>
+                        <li>
+                            <span>By</span>
+                            <a href="#">Admin</a>
+                        </li>
+                        <li>
+                            <span>In</span>
+                            <a href="#">Tutorials</a>
+                            <span>,</span>
+                            <a href="#">Tools & Tips</a>
+                        </li>
+                        <li>
+                            <a class="read-more" href="post-1.html">Read More <i class="icon-long-arrow-right"></i></a>
+                        </li>
+                    </ul>
+                </div> <! /.post-meta -->
+              {% endfor %}
+            </article>
+        </div><!-- /.col-md-9 -->
+    </div><!-- /.row -->
+</div><!-- /.container -->
+</section>
+
+
+
+{% endblock outer_content %}
+
+
+
+{% block extra_js %}
+<script>
+ $(".annInner").addClass("well");
+</script>
+{% endblock extra_js %}
