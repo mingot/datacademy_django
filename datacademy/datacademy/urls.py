@@ -1,6 +1,9 @@
 from django.conf.urls import patterns, include, url
 from django.views.generic import TemplateView
 from django.conf import settings
+from userena import views as userena_views
+from accounts import forms as accounts_forms
+
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
@@ -21,6 +24,11 @@ urlpatterns = patterns(
     # url(r'^detectors/', include('detectors.urls')),
 
     # userena app
+    # edit profile (overriding)
+    url(r'^accounts/(?P<username>[\.\w-]+)/edit/$',
+        userena_views.profile_edit,
+        {'edit_profile_form': accounts_forms.EditProfileForm},
+        name='userena_profile_edit'),
     (r'^accounts/', include('userena.urls')),
 
     # courses app

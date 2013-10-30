@@ -1,6 +1,7 @@
 {% extends 'userena/profile_base.html' %}
 {% load i18n %}
 {% load url from future %}
+{% load bootstrap3 %}
 
 {% block content_title %}<h2>{% blocktrans with user.username as username %}Account &raquo; {{ username }}{% endblocktrans %}</h2>{% endblock %}
 
@@ -9,9 +10,9 @@
     {% csrf_token %}
     <fieldset>
       <legend>{% trans "Change email address" %}</legend>
-      {{ form.as_p }}
+      {% bootstrap_form form %}
     </fieldset>
-    <input type="submit" value="{% trans "Change email" %}" />
+    <input type="submit" value="{% trans "Change email" %}" class="btn btn-flat flat-color"/>
   </form>
 {% endblock profile_content%}
 

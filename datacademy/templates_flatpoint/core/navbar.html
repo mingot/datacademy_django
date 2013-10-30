@@ -21,20 +21,16 @@
                             <ul class="dropdown-menu">
                                 <li><a href="{% url 'course_list' %}">Courses</a></li>
                                 <li><a href="{% url 'userena_profile_edit' request.user.username %}">Settings</a></li>
-                                <li><a href="{% url 'userena_signout' %}">Log out</a></li>
+                                <li><a href="{% url 'userena_signout' %}">Sign out</a></li>
                             </ul>
                         </li>
                     {% else %}
-                        <li><a href="{% url 'userena_signin' %}">Log in</a></li>
+                        <li><a href="{% url 'userena_signin' %}">Sign in</a></li>
                         <li><a href="{% url 'userena_signup' %}">Sign up</a></li>
                     {% endif %}
-                </ul>
-                <!-- /.nav -->
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container -->
-    </nav>
-    <!-- /.navbar -->
+                </ul><!-- /.nav -->
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container -->
+    </nav><!-- /.navbar -->
 </header>
 <!-- /#header-2 -->

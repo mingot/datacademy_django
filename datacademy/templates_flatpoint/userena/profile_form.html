@@ -12,9 +12,9 @@
     {% csrf_token %}
     <fieldset>
       <legend>{% trans "Edit Profile" %}</legend>
-      {{ form.as_p }}
+      {% bootstrap_form form %}
     </fieldset>
-    <input type="submit" value="{% trans "Save changes" %}" />
+    <input type="submit" value="{% trans "Save changes" %}" class="btn btn-flat flat-color"/>
   </form>
 
 {% endblock profile_content %}
