@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "courses/lecture_base.html" %}
 {% load staticfiles %}
 
 
@@ -20,26 +20,22 @@
   </style>
 {% endblock extra_css %}
 
-{% block content %}
+{% block lecture_content %}
 
-  <div class="row-fluid">
-
-    {% include "core/sidebar.html" %}
-
-    <div class="col-md-10">
-      <div class="col-md-10 page-header">
+    
+      <div class="page-header">
         <h1>{{ exercise.title }}</h1>
         <p class="lead">{{ exercise.description }}</p>
       </div>
 
       <!-- Terminal -->
-      <div class="col-md-5">
+      <div class="col-md-5 col-lg-5">
         <div id="term_demo" class="terminal">
         </div>
       </div>
 
       <!-- Helper -->
-      <div class="col-md-5">
+      <div class="col-md-5 col-lg-5">
 
         <!-- Tab nav -->
         <ul id="ulTab" class="nav nav-tabs">
@@ -66,17 +62,14 @@
           </div>
         </div>
       </div><!--/span5 helper-->
-    </div><!--/span10-->
-  </div><!--/row-fluid-->
-{% endblock content %}
+  
+{% endblock lecture_content %}
 
 
 {% block push %}{% endblock push %}
 
 
 {% block extra_js %}
-  <script type="text/javascript" src="{% static 'js/pdfjs/pdf.js' %}"></script>
-  <script type="text/javascript" src="{% static 'js/pdfjs/compatibility.js' %}"></script>
   <script type="text/javascript" src="{% static 'js/jquery_terminal/jquery.mousewheel-min.js' %}"></script>
   <script type="text/javascript" src="{% static 'js/jquery_terminal/jquery.terminal-min.js' %}"></script>
   <script>
@@ -92,7 +85,6 @@
       $("#frame").attr("src", url);
     }
   </script>
-
 
   <script>
     $(function () {
@@ -141,77 +133,5 @@
   });
   </script>
 
-
-  <script type="text/javascript">
-    PDFJS.workerSrc = {% static 'js/pdfjs/pdf.worker.js' %};
-  </script>
-
-
-  {% if lecture.slides %}
-  <script type="text/javascript">
-    //
-    // Disable workers to avoid yet another cross-origin issue (workers need the URL of
-    // the script to be loaded, and currently do not allow cross-origin scripts)
-    //
-    // PDFJS.disableWorker = true;
-
-    var pdfDoc = null,
-        pageNum = 1,
-        scale = 0.8,
-        canvas = document.getElementById('the-canvas'),
-        ctx = canvas.getContext('2d');
-
-    //
-    // Get page info from document, resize canvas accordingly, and render page
-    //
-    function renderPage(num) {
-      // Using promise to fetch the page
-      pdfDoc.getPage(num).then(function(page) {
-        var viewport = page.getViewport(scale);
-        canvas.height = viewport.height;
-        canvas.width = viewport.width;
-
-        // Render PDF page into canvas context
-        var renderContext = {
-          canvasContext: ctx,
-          viewport: viewport
-        };
-        page.render(renderContext);
-      });
-
-      // Update page counters
-      document.getElementById('page_num').textContent = pageNum;
-      document.getElementById('page_count').textContent = pdfDoc.numPages;
-    }
-
-    //
-    // Go to previous page
-    //
-    function goPrevious() {
-      if (pageNum <= 1)
-        return;
-      pageNum--;
-      renderPage(pageNum);
-    }
-
-    //
-    // Go to next page
-    //
-    function goNext() {
-      if (pageNum >= pdfDoc.numPages)
-        return;
-      pageNum++;
-      renderPage(pageNum);
-    }
-
-    //
-    // Asynchronously download PDF as an ArrayBuffer
-    //
-    PDFJS.getDocument('{{ lecture.slides.url }}').then(function getPdfHelloWorld(_pdfDoc) {
-      pdfDoc = _pdfDoc;
-      renderPage(pageNum);
-    });
-  </script>  
-  {% endif %}
 {% endblock extra_js %}
 

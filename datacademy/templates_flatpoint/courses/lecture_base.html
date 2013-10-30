@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load url from future %}
+
+{% block outer_content %}
+
+<section id="blog-wrapper" class="section layout-2">
+
+        <div class="row">
+            <div class="col-md-10 content-wrapper">
+            
+            {% block lecture_content %}
+            {% endblock lecture_content %}    
+
+            </div>
+            <!-- /.content-wrapper -->
+
+            <div class="col-md-2 sidebar">     
+                <div class="widget categories">
+                    <h5 class="subpage-title">Lectures</h5>
+                    <ul class="widget-list">
+                        <li><a href="{% url 'lecture_detail' lecture.pk %}">Lecture {{ lecture.number }}</a></li>
+                        <li><a href="{% url 'course_detail' lecture.course.pk %}">Lecture list</a></li>
+                    </ul>
+                </div>
+
+                <div class="widget categories">
+                    <h5 class="subpage-title">Exercises</h5>
+                    <ul class="widget-list">
+                        {% for exercise in lecture.exercise_set.all %}
+                            {% if exercise == element_active %}
+                                <li class="active"><a href="{% url 'exercise_detail' exercise.pk %}">{{ exercise.title }}</a></li>
+                            {% else %}
+                                <li><a href="{% url 'exercise_detail' exercise.pk %}">{{ exercise.title }}</a></li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div><!-- /.categories -->
+            </div><!-- /.sidebar -->
+        </div><!-- /.row -->
+</section><!-- /#blog-wrapper -->
+
+{% endblock outer_content%}
+
+

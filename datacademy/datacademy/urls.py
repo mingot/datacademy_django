@@ -27,7 +27,7 @@ urlpatterns = patterns(
     # edit profile (overriding)
     url(r'^accounts/(?P<username>[\.\w-]+)/edit/$',
         userena_views.profile_edit,
-        {'edit_profile_form': accounts_forms.EditProfileForm},
+        {'edit_profile_form': accounts_forms.EditDatacademyProfileForm},
         name='userena_profile_edit'),
     (r'^accounts/', include('userena.urls')),
 

@@ -1,30 +1,24 @@
-{% extends "base.html" %}
+{% extends "courses/lecture_base.html" %}
 {% load staticfiles %}
 
 
-{% block content %}
+{% block lecture_content %}
 
-  <div class="row row-offcanvas row-offcanvas-left">
-
-    {% include "core/sidebar.html" %}
-
-    <div class="col-xs-12 col-sm-9"> 
-
-      <div class="page-header">
+    <div class="page-header ">
         <h1><small>Lecture {{ lecture.number }} </small>{{ lecture.title }}</h1>
-      </div>
+    </div>
+    
+    <div style="text-align: center">
+    {{ lecture.video|safe }}
+    </div>
 
-      <div class="col-md-8 col-md-offset-1">
-        {{ lecture.video|safe }}
-        <hr>
-        <p class="text-center">
-          <a href="{% url 'exercise_detail' lecture.exercise_set.all.0.pk %}" class="btn btn-large btn-primary">Start challenges</a>
-        </p>
-      </div><!-- /col-md-8 -->
-
-    </div><!-- /col-md-10 -->
-  </div><!-- row -->
-{% endblock content %}
+    <hr>
+    
+    <p class="text-center">
+        <a href="{% url 'exercise_detail' lecture.exercise_set.all.0.pk %}" class="btn btn-large btn-primary">Start challenges</a>
+    </p>
+  
+{% endblock lecture_content %}
 
 
 {% block extra_js %}
