@@ -24,14 +24,16 @@
             <div class="widget categories">
                 <h5 class="subpage-title">Lectures</h5>
                 <ul class="widget-list">
-                    <li><a href="{% url 'lecture_detail' lecture.pk %}">Lecture {{ lecture.number }}</a></li>
-                    <li><a href="{% url 'course_detail' lecture.course.pk %}">Lecture list</a></li>
-                    <li><a href="{% url 'lecture_discussion' lecture.pk %}">Course discussion</a></li>
+                    {% for lecture in course.lecture_set.all %}
+                    <li><a href="{% url 'lecture_detail' lecture.pk %}">{{ lecture.number }}.  {{ lecture.title }}</a></li>
+                    {% endfor %}
+                    <li><a href="{% url 'course_discussion' course.pk %}"><strong> Course discussion</strong></a></li>
                 </ul>
             </div>
 
+            {% if lecture %}
             <div class="widget categories">
-                <h5 class="subpage-title">Exercises</h5>
+                <h5 class="subpage-title">Exercises {{ lecture.number }}</h5>
                 <ul class="widget-list">
                     {% for exercise in lecture.exercise_set.all %}
                         {% if exercise == element_active %}
@@ -42,6 +44,7 @@
                     {% endfor %}
                 </ul>
             </div><!-- /.categories -->
+            {% endif %}
         </div><!-- /.sidebar -->
 
 

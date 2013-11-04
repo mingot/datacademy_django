@@ -19,7 +19,7 @@
                         <li class="dropdown active">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ request.user }}</a>
                             <ul class="dropdown-menu">
-                                <li><a href="{% url 'course_list' %}">Courses</a></li>
+                                <li><a href="{% url 'userena_profile_detail' request.user.username%}">My courses</a></li>
                                 <li><a href="{% url 'userena_profile_edit' request.user.username %}">Settings</a></li>
                                 <li><a href="{% url 'userena_signout' %}">Sign out</a></li>
                             </ul>

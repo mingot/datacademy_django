@@ -62,6 +62,9 @@
   <div class="container wrapper-2">
     <h5 class="subpage-title">Courses</h5>
     <div class="row">
+    {% if not profile.courses.all %}
+    <p class="text-center">You do not have courses yet. Enroll!</p>
+    {% endif %}  
     {% for course in profile.courses.all %}
         <div class="col-xs-12 col-sm-6 col-md-4 portfolio-item-wrapper">
             <div class="portfolio-item">

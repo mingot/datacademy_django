@@ -43,6 +43,8 @@ class LectureDetail(DetailView):
         profile = self.request.user.get_profile()
         profile.courses.add(self.object.course)
         profile.save()
+        # Add course to the context
+        context['course'] = self.object.course
         return context
 
     # def get_context_data(self, **kwargs):
@@ -66,14 +68,15 @@ class ExerciseDetail(DetailView):
         # Call the base implementation first to get a context
         context = super(ExerciseDetail, self).get_context_data(**kwargs)
         # Add in a QuerySet of all the books
+        context['course'] = self.object.lecture.course
         context['lecture'] = self.object.lecture
         context['element_active'] = self.object
         return context
 
 
-def lecture_discussion(request, pk):
-    lecture = get_object_or_404(Lecture, pk=pk)
+def course_discussion(request, pk):
+    course = get_object_or_404(Course, pk=pk)
     return render_to_response('courses/course_discussion.html',
-                              {'lecture': lecture},
+                              {'course': course},
                               context_instance=RequestContext(request))
 

@@ -13,6 +13,11 @@ urlpatterns = patterns(
         views.CourseDetail.as_view(),
         name='course_detail'),  # course detail - list lectures
 
+    #course discussion
+    url(r'^(?P<pk>[0-9]+)/discussion/',
+        'courses.views.course_discussion',
+        name='course_discussion'),
+
     # list lectures for given course id
     url(r'^lectures/list/(?P<course>[0-9]+)/$',
         views.LectureList.as_view(),
@@ -22,11 +27,6 @@ urlpatterns = patterns(
     url(r'^lectures/(?P<pk>[0-9]+)/$',
         views.LectureDetail.as_view(),
         name='lecture_detail'),
-
-    #lecture discussion
-    url(r'^lectures/(?P<pk>[0-9]+)/discussion/',
-        'courses.views.lecture_discussion',
-        name='lecture_discussion'),
 
     #list lectures for given lecture id
     url(r'^exercises/list/(?P<lecture>[0-9]+)/$',
