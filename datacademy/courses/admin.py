@@ -8,6 +8,7 @@ class LectureInline(admin.TabularInline):
 
 class CourseAdmin(admin.ModelAdmin):
     inlines = [LectureInline]
+    readonly_fields = ('duration', )
 
 
 class ExerciseInline(admin.TabularInline):

@@ -38,6 +38,7 @@ urlpatterns = patterns(
     (r'^news/', include('news.urls')),
 
     # Uncomment the next line to enable the admin:
+    (r'^grappelli/', include('grappelli.urls')), # grappelli URLS
     url(r'^admin/', include(admin.site.urls)),
 )
 

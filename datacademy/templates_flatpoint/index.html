@@ -2,7 +2,8 @@
 {% load staticfiles %}
 
 {% block extra_css %}
-  <!-- Custom styles for this template -->
+    <!-- REVOLUTION BANNER CSS SETTINGS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'rs-plugin/css/settings.css' %}" media="screen" />
 {% endblock extra_css %}
 
 
@@ -196,12 +197,9 @@
                     <h4>Pay just if you finish</h4>
                     <p>Donec in velit vel ipsum auctor pulvinar. Vesti bulum iaculis lacinia est. Proin dictum elementum velit. Fusce euismod auctor pulvinar.</p>
                 </div>
-            </div>
-            <!-- /.col-sm-6 -->                                                                 
-        </div>
-        <!-- /.row -->
-    </div>
-    <!-- /.container -->
+            </div><!-- /.col-sm-6 -->                                                                 
+        </div><!-- /.row -->
+    </div><!-- /.container -->
 </section>
 <!-- /SERVICES -->
 
@@ -212,83 +210,50 @@
             <span>Courses</span>
         </h5>
         <div class="row">
-            <div id="">
-                <div class="col-xs-12 col-sm-6 col-md-4 portfolio-item-wrapper">
-                    <div class="portfolio-item">
-                        <div class="portfolio-thumb">
-                            <img src="{% static 'img/portfolio/photo (1).jpg' %}" class="img-responsive" alt="1st Portfolio Thumb">
-                            <div class="image-overlay"></div>
-                            <a href="{% url 'course_detail' 1 %}" class="portfolio-link"><i class="icon-plus"></i></a>
-                        </div>
-                        <div class="portfolio-content">
-                            <h5>Recommender systems</h5>
-                            <p>Nullam id dolor id nibh ultricies vehicula.</p>
-                        </div>
+            <div class="col-xs-12 col-sm-6 col-md-4 portfolio-item-wrapper">
+                <div class="portfolio-item">
+                    <div class="portfolio-thumb">
+                        <img src="{% static 'img/portfolio/photo (1).jpg' %}" class="img-responsive" alt="1st Portfolio Thumb">
+                        <div class="image-overlay"></div>
+                        <a href="{% url 'course_detail' 1 %}" class="portfolio-link"><i class="icon-plus"></i></a>
+                    </div>
+                    <div class="portfolio-content">
+                        <h5>Recommender Systems</h5>
+                        <p>Lorem ipsum roman totiem.</p>
                     </div>
                 </div>
-                <!-- /.portfolio-item-wrapper -->
-                <div class="col-xs-12 col-sm-6 col-md-4 portfolio-item-wrapper">
-                    <div class="portfolio-item">
-                        <div class="portfolio-thumb">
-                            <img src="{% static 'img/portfolio/photo (12).jpg'%}" class="img-responsive" alt="2nd Portfolio Thumb">
-                            <div class="image-overlay"></div>
-                            <a href="#" class="portfolio-link"><i class="icon-plus"></i></a>
-                        </div>
-                        <div class="portfolio-content">
-                            <h5>Customer Segmentation</h5>
-                            <p>Nullam id dolor id nibh ultricies vehicula.</p>
-                        </div>
-                    </div>
-                </div>
-                <!-- /.portfolio-item-wrapper -->
-                <div class="col-xs-12 col-sm-6 col-md-4 portfolio-item-wrapper">
-                    <div class="portfolio-item">
-                        <div class="portfolio-thumb">
-                            <img src="{% static 'img/portfolio/photo (2).jpg' %}" class="img-responsive" alt="3rd Portfolio Thumb">
-                            <div class="image-overlay"></div>
-                            <a href="#" class="portfolio-link"><i class="icon-plus"></i></a>
-                        </div>
-                        <div class="portfolio-content">
-                            <h5>Churn Detection</h5>
-                            <p>Nullam id dolor id nibh ultricies vehicula.</p>
-                        </div>
-                    </div>
-                </div>
-                <!-- /.portfolio-item-wrapper -->
-                <div class="col-xs-12 col-sm-6 col-md-4 portfolio-item-wrapper">
-                    <div class="portfolio-item">
-                        <div class="portfolio-thumb">
-                            <img src="{% static 'img/portfolio/photo (4).jpg' %}" class="img-responsive" alt="4th Portfolio Thumb">
-                            <div class="image-overlay"></div>                    
-                            <a href="#" class="portfolio-link"><i class="icon-plus"></i></a>
-                        </div>
-                        <div class="portfolio-content">
-                            <h5>Life Time Value Prediction</h5>
-                            <p>Nullam id dolor id nibh ultricies vehicula.</p>
-                        </div>
-                    </div>
-                </div>
-                <!-- /.portfolio-item-wrapper -->
-                <div class="col-xs-12 col-sm-6 col-md-4 portfolio-item-wrapper">
-                    <div class="portfolio-item">
-                        <div class="portfolio-thumb">
-                            <img src="{% static 'img/portfolio/photo (5).jpg' %}" class="img-responsive" alt="5th Portfolio Thumb">
-                            <div class="image-overlay"></div>
-                            <a href="#" class="portfolio-link"><i class="icon-plus"></i></a>
-                        </div>
-                        <div class="portfolio-content">
-                            <h5>Football prediction</h5>
-                            <p>Nullam id dolor id nibh ultricies vehicula.</p>
-                        </div>
-                    </div>
-                </div>
-                <!-- /.portfolio-item-wrapper -->
             </div>
-            <!-- /.caroufredsel-portfolio-container -->
-        </div>
-        <!-- /.row -->
-    </div>
-    <!-- /.container -->
+            <!-- /.portfolio-item-wrapper -->
+            <div class="col-xs-12 col-sm-6 col-md-4 portfolio-item-wrapper">
+                <div class="portfolio-item">
+                    <div class="portfolio-thumb">
+                        <img src="{% static 'img/portfolio/photo (12).jpg'%}" class="img-responsive" alt="2nd Portfolio Thumb">
+                        <div class="image-overlay"></div>
+                        <a href="#" class="portfolio-link"><i class="icon-plus"></i></a>
+                    </div>
+                    <div class="portfolio-content">
+                        <h5>Customer Segmentation</h5>
+                        <p>Nullam id dolor id nibh ultricies vehicula.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- /.portfolio-item-wrapper -->
+            <div class="col-xs-12 col-sm-6 col-md-4 portfolio-item-wrapper">
+                <div class="portfolio-item">
+                    <div class="portfolio-thumb">
+                        <img src="{% static 'img/portfolio/photo (2).jpg' %}" class="img-responsive" alt="3rd Portfolio Thumb">
+                        <div class="image-overlay"></div>
+                        <a href="#" class="portfolio-link"><i class="icon-plus"></i></a>
+                    </div>
+                    <div class="portfolio-content">
+                        <h5>Churn Detection</h5>
+                        <p>Nullam id dolor id nibh ultricies vehicula.</p>
+                    </div>
+                </div>
+            </div>
+            
+        </div><!-- /.row -->
+    </div><!-- /.container -->
 </section>
 <!-- /COURSES -->
 

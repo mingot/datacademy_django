@@ -1,47 +1,86 @@
-{% extends 'userena/profile_base.html' %}
+{% extends "base.html" %} 
 {% load i18n %}
 {% load url from future %}
+{%  load staticfiles %}
 
-{% block title %}{% blocktrans with profile.user.username as username %}{{ username }}'s profile.{% endblocktrans %}{% endblock %}
-{% block content_title %}<h2>{{ profile.user.username }} {% if profile.user.get_full_name %}({{ profile.user.get_full_name }}){% endif %}</h2>{% endblock %}
-
-
-{% block profile_content %}
-  <img class="mugshot" src="{{ profile.get_mugshot_url }}" alt="{% trans "Your mugshot" %}" />
-  <dl>
-    {% block profile_definition_list %}
-      {% if profile.user.get_full_name %}
-        <dt>{% trans "Name" %}</dt>
-        <dd>{{ profile.user.get_full_name }}</dd>
-      {% endif %}
-      {% if profile.user.email and not hide_email %}
-        <dt>{% trans "Email" %}</dt>
-        <dd>{{ profile.user.email }}</dd>
-      {% endif %}
-      {% if profile.age %}
-        <dt>{% trans "Age" %}</dt>
-        <dd>{{ profile.age }}</dd>
-      {% endif %}
-      {% if profile.website %}
-        <dt>{% trans "Website" %}</dt>
-        <dd>{{ profile.website|urlize }}</dd>
-      {% endif %}
-      {% if profile.location %}
-        <dt>{% trans "Location" %}</dt>
-        <dd>{{ profile.location }}</dd>
-      {% endif %}
-      {% if profile.about_me %}
-        <dt>{% trans "About me" %}</dt>
-        <dd>{{ profile.about_me }}</dd>
-      {% endif %}
-    {% endblock %}
-  </dl>
-{% endblock profile_content %}
+{% block title %}{{ username }}'s profile.{% endblock %}
 
 
-{% block extra_js %}
-<script>
-  $("#view_profile").addClass("active");
-</script>
-{% endblock extra_js %}
+{% block extra_css %}
+<style>
+.a-linkedin{
+  width: 30px;
+  height: 30px;
+  display: block;
+  text-align: center;
+  line-height: 30px;
+  border-radius: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+</style>
+{% endblock extra_css %}
+
+
+{% block outer_content %}
+
+{% include "core/page_title.html" with page_title='Public Profile' %}
+
+<!-- PROFILE -->
+<section class="section colored-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 wrapper-1">
+                <div id="carousel-example-generic" class="carousel slide">
+                  <img src="{{ profile.get_mugshot_url }}" class="img-responsive" height="200", width="200">
+                </div>
+            </div>
+            <div class="col-md-9 wrapper-1">
+                <h3 class="subpage-title">{{ profile.user.username }}</h3>
+                {% if profile.short_bio %}
+                    <p>{{ profile.short_bio }}</p>
+                {% else %}
+                    <p> No bio provided.</p>
+                {% endif %}
+
+                {% if profile.linkedin_profile %}
+                    <p><a href="{{ profile.linkedin_profile }}" class="a-linkedin">
+                      <i class="icon-linkedin"></i>
+                    </a></p>
+                {% endif %}
+
+                {% ifequal profile.user.username user.username %}
+                    <a href="{% url 'userena_profile_edit' user.username %}">Edit profile</a>
+                {% endifequal %}
+            </div>
+        </div>
+    </div><!-- /.container -->
+</section>
+
+<!-- COURSES -->
+<section class="section">
+  <div class="container wrapper-2">
+    <h5 class="subpage-title">Courses</h5>
+    <div class="row">
+    {% for course in profile.courses.all %}
+        <div class="col-xs-12 col-sm-6 col-md-4 portfolio-item-wrapper">
+            <div class="portfolio-item">
+                <div class="portfolio-thumb">
+                    <img src="{% static 'img/portfolio/photo (1).jpg' %}" class="img-responsive" alt="1st Portfolio Thumb">
+                    <div class="image-overlay"></div>
+                    <a href="{% url 'course_detail' course.pk %}" class="portfolio-link"><i class="icon-plus"></i></a>
+                </div>
+                <div class="portfolio-content">
+                    <h5>{{ course.title }}</h5>
+                    <p>{{ course.short_description }}}</p>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% endblock outer_content %}
+
+
 
