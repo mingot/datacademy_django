@@ -1,4 +1,6 @@
 from django.views.generic import ListView, DetailView
+from django.shortcuts import get_object_or_404, render_to_response
+from django.template import RequestContext
 from .models import Course, Lecture, Exercise
 
 
@@ -67,3 +69,11 @@ class ExerciseDetail(DetailView):
         context['lecture'] = self.object.lecture
         context['element_active'] = self.object
         return context
+
+
+def lecture_discussion(request, pk):
+    lecture = get_object_or_404(Lecture, pk=pk)
+    return render_to_response('courses/course_discussion.html',
+                              {'lecture': lecture},
+                              context_instance=RequestContext(request))
+

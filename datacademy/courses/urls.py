@@ -23,13 +23,19 @@ urlpatterns = patterns(
         views.LectureDetail.as_view(),
         name='lecture_detail'),
 
+    #lecture discussion
+    url(r'^lectures/(?P<pk>[0-9]+)/discussion/',
+        'courses.views.lecture_discussion',
+        name='lecture_discussion'),
+
     #list lectures for given lecture id
-    url(r'^exercises/list/(?P<lecture>[0-9]+)$',
+    url(r'^exercises/list/(?P<lecture>[0-9]+)/$',
         views.ExerciseList.as_view(),
         name='exercise_list'),
 
     #detail exercise for given exercise id
-    url(r'^exercises/(?P<pk>[0-9]+)$',
+    url(r'^exercises/(?P<pk>[0-9]+)/$',
         views.ExerciseDetail.as_view(),
         name='exercise_detail'),
+
 )

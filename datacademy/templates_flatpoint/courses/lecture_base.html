@@ -26,6 +26,7 @@
                 <ul class="widget-list">
                     <li><a href="{% url 'lecture_detail' lecture.pk %}">Lecture {{ lecture.number }}</a></li>
                     <li><a href="{% url 'course_detail' lecture.course.pk %}">Lecture list</a></li>
+                    <li><a href="{% url 'lecture_discussion' lecture.pk %}">Course discussion</a></li>
                 </ul>
             </div>
 
