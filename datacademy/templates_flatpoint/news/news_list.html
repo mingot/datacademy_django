@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% load staticfiles %}
-
+{% load extra_filters %}
 
 
 {% block outer_content %}
@@ -11,13 +11,43 @@
 <section id="blog-wrapper" class="section layout-1">
 <div class="container">
     <div class="row">
-        <div class="col-md-9 content-wrapper">
+        <div class="col-md-9 content-wrapper" id="accordion">
             {% for element in news %}
             <article class="post">
                 <div class="post-content">
-                    <h4 class="post-title"><a href="{{ element.link }}">{{ element.title }}</a></h4>
+                    <h3 class="post-title"><a href="{{ element.link }}">{{ element.title }}</a></h3>
                     {{ element.raw|safe }}
                 </div> <!-- /.post-content -->
+
+                <!-- DISCUSSION -->
+                <div class="panel-group">
+                <div class="panel panel-default">
+                    {% with num=forloop.counter|stringformat:"s" %}
+                    {% with collapse="collapse"|add:num %}
+                    {% with id=element.title|slugify_under|slice:"20" %}
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <!--<a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="{{ "#"|add:collapse }}" onclick={{ "reset_"|add:id }}();>-->
+                            <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#{{ collapse }}" onclick="loadDisqus(jQuery('#inform{{ collapse }}'),'{{ id }}' ,'http://datacademy.herokuapp.com/#!{{ id }}' );">
+                            Discussion
+                            </a>
+                        </h4>
+                    </div> 
+
+                    <div id="{{ collapse }}" class="panel-collapse collapse">
+                        <div id="inform{{ collapse }}" class="panel-body">
+
+                            <!-- DISQUS COMMENT -->
+
+                        </div>
+                    </div>
+                    {% endwith %}
+                    {% endwith %}
+                    {% endwith %}
+                </div>
+                </div>
+
+                <hr>
               {% endfor %}
             </article>
         </div><!-- /.col-md-9 -->
@@ -32,6 +62,59 @@
 {% block extra_js %}
 <script>
  $(".annInner").addClass("well");
+</script>
+
+<script>
+// Hide previous active element
+var activeItem;
+$('.collapse').on('show.bs.collapse', function () {
+    console.log("Fired!!");
+    if(activeItem!=undefined){
+        $(activeItem).collapse('hide');
+    }
+    activeItem = $(this);
+});
+</script>
+
+
+<script>
+var disqus_shortname = 'datacademy';
+var disqus_identifier; //made of post id and guid
+var disqus_url; //post permalink
+
+function loadDisqus(source, identifier, url) {
+
+    console.log("identifier" + identifier);
+    console.log("url" + url);
+
+    if (window.DISQUS) {
+
+       jQuery('#disqus_thread').insertAfter(source); //append the HTML after the link
+
+       //if Disqus exists, call it's reset method with new parameters
+       DISQUS.reset({
+          reload: true,
+          config: function () {
+          this.page.identifier = identifier;
+          this.page.url = url;
+
+          }
+       });
+
+    } else {
+
+       //insert a wrapper in HTML after the relevant "show comments" link
+       jQuery('<div id="disqus_thread"></div>').insertAfter(source);
+       disqus_identifier = identifier; //set the identifier argument
+       disqus_url = url; //set the permalink argument
+
+       //append the Disqus embed script to HTML
+       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+       dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+       jQuery('head').append(dsq);
+
+    }
+};
 </script>
 
 {% endblock extra_js %}
