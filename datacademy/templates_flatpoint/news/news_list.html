@@ -16,29 +16,67 @@
             <article class="post">
                 <div class="post-content">
                     <h3 class="post-title"><a href="{{ element.link }}">{{ element.title }}</a></h3>
-                    {{ element.raw|safe }}
-                </div> <!-- /.post-content -->
+                    {% for highlight in element.highlights %}
+                        <p>{{ highlight|safe }}</p>
+                    {% endfor %}
 
-                <!-- DISCUSSION -->
-                <div class="panel-group">
-                <div class="panel panel-default">
+                    <!-- COMMENTS -->
+                    {% if element.comments %}
+                        <p></p>
+                        <p><strong>Thoughts:</strong></p>
+                        {{ element.comments|safe }}
+                    {% endif %}
+
                     {% with num=forloop.counter|stringformat:"s" %}
                     {% with collapse="collapse"|add:num %}
                     {% with id=element.title|slugify_under|slice:"20" %}
+                    
+                    <!-- META INFORMATION -->
+                    <div class="post-meta">
+                        <ul class="meta-list">
+                            <li>
+                                <span>Posted on</span>
+                                {{ element.date }}
+                            </li>
+                            <li>
+                                <span>By</span>
+                                {{ element.users_info|safe }}
+                            </li>
+                            <li>
+                                <span>Tags</span>
+                                {{ element.tags_info|safe }}
+                            </li>
+                            <li>
+                                <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#{{ collapse }}" onclick="loadDisqus(jQuery('#inform{{ collapse }}'),'{{ id }}' ,'http://datacademy.herokuapp.com/#!{{ id }}' );">
+                                Comments <i class="icon-long-arrow-right"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- /.post-meta -->
+
+                    
+                    
+                    
+                </div> <!-- /.post-content -->
+
+                <!-- DISCUSSION -->
+                <p></p>
+                <div class="panel-group">
+                <div class="panel panel-default">
+                    
+                    <!-- More expressive discussion
                     <div class="panel-heading">
                         <h4 class="panel-title">
-                            <!--<a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="{{ "#"|add:collapse }}" onclick={{ "reset_"|add:id }}();>-->
                             <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#{{ collapse }}" onclick="loadDisqus(jQuery('#inform{{ collapse }}'),'{{ id }}' ,'http://datacademy.herokuapp.com/#!{{ id }}' );">
                             Discussion
                             </a>
                         </h4>
-                    </div> 
+                    </div>--> 
 
                     <div id="{{ collapse }}" class="panel-collapse collapse">
                         <div id="inform{{ collapse }}" class="panel-body">
 
                             <!-- DISQUS COMMENT -->
-
                         </div>
                     </div>
                     {% endwith %}
@@ -47,7 +85,7 @@
                 </div>
                 </div>
 
-                <hr>
+                
               {% endfor %}
             </article>
         </div><!-- /.col-md-9 -->
@@ -81,6 +119,7 @@ $('.collapse').on('show.bs.collapse', function () {
 var disqus_shortname = 'datacademy';
 var disqus_identifier; //made of post id and guid
 var disqus_url; //post permalink
+
 
 function loadDisqus(source, identifier, url) {
 

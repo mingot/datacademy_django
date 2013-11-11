@@ -1,21 +1,9 @@
 from django.shortcuts import render_to_response
 from django.template import RequestContext
-from HTMLParser import HTMLParser
+from BeautifulSoup import BeautifulSoup
+from datetime import datetime
 import feedparser
 import urllib2
-
-
-class SummaryParser(HTMLParser):
-    entries = []
-
-    def handle_starttag(self, tag, attrs):
-        pass
-    
-    def handle_endtag(self, tag):
-        pass
-    
-    def handle_data(self, data):
-        self.entries.append(data)
 
 
 def news_list(request):
@@ -30,19 +18,34 @@ def construct_rss_dictionary():
     raw_data = response.read()
     feed = feedparser.parse(raw_data)
     dictionaries = []
-    parser = SummaryParser()
 
     for entry in feed['entries']:
         dictionary = {}
         dictionary['title'] = entry['title']
         dictionary['link'] = entry['links'][0]['href']
+        date_unformated = entry['published']
+        dictionary['date'] = datetime.strptime(date_unformated,
+                                               "%a, %d %b %Y %H:%M:%S -%f").strftime("%d %b %Y")
 
         raw_html = entry['summary']
+
+        soup = BeautifulSoup(raw_html)
+        
+        # highlights
+        comments = soup.findAll('div', attrs={'class': 'annInner'})
+        dictionary['highlights'] = []
+        for comment in comments:
+            dictionary['highlights'].append(comment.__str__())
+
+        # tags and user
+        paragraphs = soup('p')[-3:]
+        if paragraphs[0].ul:
+            dictionary['comments'] = paragraphs[0].ul.__str__()
+        dictionary['tags_info'] = paragraphs[1].a.__str__()
+        dictionary['users_info'] = paragraphs[2].a.__str__()
+
         # assert False
-        parser.entries = []
-        parser.feed(raw_html)
-        dictionary['info'] = parser.entries
-        dictionary['raw'] = raw_html
+        # dictionary['raw'] = raw_html
 
         dictionaries.append(dictionary)
 
