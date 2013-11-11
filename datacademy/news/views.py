@@ -38,7 +38,6 @@ def construct_rss_dictionary():
         dictionary['link'] = entry['links'][0]['href']
 
         raw_html = entry['summary']
-        print raw_html
         # assert False
         parser.entries = []
         parser.feed(raw_html)
